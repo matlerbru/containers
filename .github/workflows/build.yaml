@@ -19,5 +19,5 @@ jobs:
 
       - name: "Build Image"
         run: |
-          docker build -t ghcr.io/${{github.actor}}/${GITHUB_REF##*/}:latest -f build/Dockerfile .
+          docker build -t ghcr.io/${{github.actor}}/${GITHUB_REF##*/}:latest -f ${GITHUB_REF##*/}/Dockerfile .
           docker push ghcr.io/${{github.actor}}/${GITHUB_REF##*/}:latest
