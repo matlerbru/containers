@@ -17,6 +17,10 @@ jobs:
           username: ${{github.actor}}
           password: ${{secrets.TOKEN}}
 
+      - name: "ls"
+        run: |
+          ls -alh
+
       - name: "Build Image"
         run: |
           docker build -t ghcr.io/${{github.actor}}/${GITHUB_REF##*/}:latest -f ${GITHUB_REF##*/}/Dockerfile .
