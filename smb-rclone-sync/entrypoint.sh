@@ -12,4 +12,4 @@ rclone config create remote $RCLONE_TYPE \
  password=$RCLONE_PASSWORD \
  --obscure
 
-rclone sync /mnt/smb-share remote:$SMB_SHARE/ -c
+rclone sync /mnt/smb-share remote:$SMB_SHARE/ -v
