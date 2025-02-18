@@ -5,7 +5,7 @@ mkdir /mnt/smb-share
 
 mount \
  -t cifs //$SMB_ADDRESS/$SMB_SHARE /mnt/smb-share \
- -o username=$SMB_USERNAME,password=$SMB_PASSWORD,vers=3.0,file_mode=0777,dir_mode=0777
+ -o username=$SMB_USERNAME,password=$SMB_PASSWORD,vers=3.0,file_mode=0555,dir_mode=0555
 
 rclone config create remote $RCLONE_TYPE \
  username=$RCLONE_USERNAME \
@@ -24,7 +24,7 @@ echo "$(cat /tmp/diff.txt | wc -l) files to sync"
 
 
 rclone sync /mnt/smb-share remote:$SMB_SHARE/ \
- --files-from /tmp/diff.txt \
+ --includes /tmp/diff.txt \
  --checksum \
  -vv
 
