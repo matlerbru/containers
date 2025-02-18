@@ -12,7 +12,7 @@ rclone config create remote $RCLONE_TYPE \
  password=$RCLONE_PASSWORD \
  --obscure
 
-mkdir -p /opt/hashes/
+touch /opt/hashes/test
 
 cd /mnt/smb-share
 
