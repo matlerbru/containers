@@ -20,7 +20,7 @@ find . -type f -exec md5sum "{}" \; > /tmp/hashes_unsorted.txt
 cat /tmp/hashes_unsorted.txt | sort > /tmp/hashes.txt
 touch /opt/hashes/hashes.txt
 diff /opt/hashes/hashes.txt /tmp/hashes.txt | awk '{print $1}' > /tmp/diff.txt
-echo "$(cat /tmp/diff.txt | wc -l}) files to sync"
+echo "$(cat /tmp/diff.txt | wc -l) files to sync"
 
 
 rclone sync /mnt/smb-share remote:$SMB_SHARE/ \
