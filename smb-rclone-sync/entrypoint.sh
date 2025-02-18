@@ -16,6 +16,9 @@ mkdir -p /opt/hashes/
 
 cd /mnt/smb-share
 
+find /opt -type f -exec md5sum {} \;
+find . -type f -exec md5sum {} \;
+
 find . -type f -exec md5sum {} \; | sort > /tmp/hashes.txt
 touch /opt/hashes/hashes.txt
 diff /opt/hashes/hashes.txt /tmp/hashes.txt | awk '{print $1}' > /tmp/diff.txt
