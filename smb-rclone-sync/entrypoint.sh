@@ -12,4 +12,16 @@ rclone config create remote $RCLONE_TYPE \
  password=$RCLONE_PASSWORD \
  --obscure
 
-rclone sync /mnt/smb-share remote:$SMB_SHARE/ -vv
+mkdir -p /opt/hashes/
+
+rclone hashsum MD5 /mnt/smb-share | sort > /tmp/hashes.txt
+touch /opt/hashes/hashes.txt
+diff /opt/hashes/hashes.txt /tmp/hashes.txt | awk '{print $1}' > /tmp/diff.txt
+
+
+rclone sync /mnt/smb-share remote:$SMB_SHARE/ \
+ --files-from /tmp/diff.txt \
+ --checksum \
+ -vv
+
+cp /tmp/hashes.txt /opt/hashes/hashes.txt
