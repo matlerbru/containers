@@ -19,6 +19,10 @@ cd /mnt/smb-share
 find . -type f -exec md5sum "{}" \; > /tmp/hashes_unsorted.txt
 cat /tmp/hashes_unsorted.txt | sort > /tmp/hashes.txt
 touch /opt/hashes/hashes.txt
+
+
+# escape files with space in awk
+# Do some time tracing to get how long each task takes
 diff /opt/hashes/hashes.txt /tmp/hashes.txt | awk '{print $1}' > /tmp/diff.txt
 echo "$(cat /tmp/diff.txt | wc -l) files to sync"
 
