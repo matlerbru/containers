@@ -31,7 +31,7 @@ echo "$(cat /tmp/diff.txt | wc -l) files to sync"
 
 
 rclone sync /mnt/smb-share remote:$SMB_SHARE/ \
- --include /tmp/diff.txt \
+ --include-from /tmp/diff.txt \
  --checksum \
  -vv
 
