@@ -16,7 +16,10 @@ touch /opt/hashes/test
 
 cd /mnt/smb-share
 
-find . -type f -exec md5sum "{}" \; > /tmp/hashes_unsorted.txt
+echo "Finding hashes of files."
+TIME_TAKEN=$( { /usr/bin/time -f "%E" find . -type f -exec md5sum "{}" \; > /tmp/hashes_unsorted.txt; } 2>&1 | awk '{print $2}' )
+echo "Took: $TIME_TAKEN"
+
 cat /tmp/hashes_unsorted.txt | sort > /tmp/hashes.txt
 touch /opt/hashes/hashes.txt
 
@@ -28,7 +31,7 @@ echo "$(cat /tmp/diff.txt | wc -l) files to sync"
 
 
 rclone sync /mnt/smb-share remote:$SMB_SHARE/ \
- --includes /tmp/diff.txt \
+ --include /tmp/diff.txt \
  --checksum \
  -vv
 
